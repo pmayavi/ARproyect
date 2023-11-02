@@ -5,26 +5,43 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed = 5f; // Speed of player movement
-    public float rotationSpeed = 2f; // Speed of player rotation
+    public float rotationSpeed = 3.0f; // Speed of player rotation
+
+    private float mouseX; // Mouse X input for rotation
+    private bool isCursorLocked = true;
+
+    void Start()
+    {
+        // Lock and hide the cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        // Get player input for movement
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isCursorLocked = !isCursorLocked;
+            Cursor.lockState = isCursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
+            Cursor.visible = !isCursorLocked;
+        }
+        if (isCursorLocked)
+            Move();
+    }
+
+    void Move()
+    {
+        // Player movement
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-
-        // Calculate the movement direction based on the input
         Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
-
-        // Move the player based on the calculated direction
         transform.Translate(movementDirection * movementSpeed * Time.deltaTime);
 
-        // Rotate the player based on mouse input
-        float mouseX = Input.GetAxis("Mouse X");
-        transform.Rotate(Vector3.up * mouseX * rotationSpeed);
+        // Player rotation with mouse input
+        mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
+        transform.localRotation = Quaternion.Euler(0, mouseX, 0);
     }
 }
-
 
 
