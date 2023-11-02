@@ -42,4 +42,10 @@ public class PartScript : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        Destroy(gameObject);
+        UpdateText();
+    }
 }
