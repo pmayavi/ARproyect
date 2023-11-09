@@ -5,14 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactuable
+  - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
-  - 
+  - Projectiles
   - 
   - 
   - 
