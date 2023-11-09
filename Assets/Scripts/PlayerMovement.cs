@@ -39,8 +39,13 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(movementDirection * movementSpeed * Time.deltaTime);
 
         // Player rotation with mouse input
+        /*
         mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
         transform.localRotation = Quaternion.Euler(0, mouseX, 0);
+        */
+        transform.Rotate(0,Input.GetAxis("Mouse X") * rotationSpeed, 0);
+        
+        GetComponentInChildren<Camera>().transform.Rotate(-Input.GetAxis("Mouse Y"), 0, 0);
     }
 }
 
