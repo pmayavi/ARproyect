@@ -45,7 +45,8 @@ public class PlayerMovement : MonoBehaviour
         */
         transform.Rotate(0,Input.GetAxis("Mouse X") * rotationSpeed, 0);
         
-        GetComponentInChildren<Camera>().transform.Rotate(-Input.GetAxis("Mouse Y"), 0, 0);
+        //Rotate Camera up and down
+        GetComponentInChildren<Camera>().transform.Rotate(-Input.GetAxis("Mouse Y") * rotationSpeed, 0, 0);
     }
 }
 
