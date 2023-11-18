@@ -16,11 +16,6 @@ public class InteractScript : MonoBehaviour
         displayText.text = "Partes perdidas: " + maxParts;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void PartInteraction()
     {
         numberOfParts++;

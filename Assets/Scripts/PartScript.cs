@@ -22,7 +22,7 @@ public class PartScript : MonoBehaviour
     {
         // Check for touch input on mobile devices
         //if (isTouched && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        if (isTouched && Input.GetMouseButtonDown(0))
+        if (isTouched && (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
             Gotten();
     }
 

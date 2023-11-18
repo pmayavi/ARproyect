@@ -31,7 +31,7 @@ public class DialogeScript : MonoBehaviour
     void Update()
     {
         //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             // Cycle through the lists on touch
             currentIndex = (currentIndex + 1) % Mathf.Min(imageList1.Count, imageList2.Count, textList.Count);

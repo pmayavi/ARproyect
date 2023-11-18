@@ -14,15 +14,10 @@ public class RotateScript : MonoBehaviour
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
 
         //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            Delete();
+            displayText.text = "";
+            Destroy(gameObject);
         }
-    }
-
-    void Delete()
-    {
-        displayText.text = "";
-        Destroy(gameObject);
     }
 }

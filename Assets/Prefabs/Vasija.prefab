@@ -146,4 +146,4 @@ MonoBehaviour:
   displayText: {fileID: 0}
   description: Esto es un plato para comer cereal :D
   objectToDisplay: {fileID: 7841838929877164974}
-  rotationSpeed: 30
+  rotationSpeed: 60
