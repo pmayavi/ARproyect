@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class FloatingEnemy : MonoBehaviour
@@ -17,6 +18,9 @@ public class FloatingEnemy : MonoBehaviour
 
     private Renderer bodyRenderer;
     public string childName = "PM3D_Sphere3D2";
+
+    // Variable del sistema de partículas
+    public ParticleSystem explosionParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +81,15 @@ public class FloatingEnemy : MonoBehaviour
             Destroy(other.collider.gameObject);
             life = life - 1;
             if (life == 0) {
-                Destroy(gameObject);
+                GetComponent<Renderer>().enabled = false;
+                GetComponent<Collider>().enabled = false;
+                if (explosionParticles != null)
+                {
+                    // Activate the particle system
+                    explosionParticles.Play();
+                }
+                FindObjectOfType<UI>().PickItem();
+                Destroy(gameObject, 1f);
             }
         }
     }
