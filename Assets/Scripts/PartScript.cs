@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 using TMPro;
 
 public class PartScript : MonoBehaviour
@@ -21,8 +23,8 @@ public class PartScript : MonoBehaviour
     void Update()
     {
         // Check for touch input on mobile devices
-        //if (isTouched && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        if (isTouched && (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+        //if (isTouched && (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+        if (isTouched)
             Gotten();
     }
 
@@ -50,8 +52,8 @@ public class PartScript : MonoBehaviour
         displayText.text = description;
 
         // Make the object a child of the ARSessionOrigin (or the main camera)
-        //displayedObject.transform.parent = FindObjectOfType<ARSessionOrigin>().transform;
-        displayedObject.transform.parent = cameraLocation;
+        displayedObject.transform.parent = FindObjectOfType<ARSessionOrigin>().transform;
+        //displayedObject.transform.parent = cameraLocation;
         displayedObject.transform.localScale *= 2f;
 
         // Start rotating the object and the delete timer
