@@ -37,19 +37,21 @@ public class FloatingEnemy : MonoBehaviour
     void Update()
     {
         // Movimiento Circular alrededor del player manteniendo una distancia estable
-        transform.LookAt(player.transform);
+        transform.LookAt(player.transform, Vector3.up);
+        transform.Rotate(0, 0, 180);
+
         Debug.Log(Vector3.Distance(transform.position, player.transform.position));
         if (Vector3.Distance(transform.position, player.transform.position) > distance)
         {
-            GetComponent<Rigidbody>().velocity = transform.forward * speed + -transform.right * speed;    
+            GetComponent<Rigidbody>().velocity = transform.forward * speed + transform.right * speed;    
         } 
         else if (Vector3.Distance(transform.position, player.transform.position) < distance)
         {
-            GetComponent<Rigidbody>().velocity = -transform.forward * speed + -transform.right * speed;    
+            GetComponent<Rigidbody>().velocity = -transform.forward * speed + transform.right * speed;    
         } 
         else 
         {
-            GetComponent<Rigidbody>().velocity = -transform.right * speed;
+            GetComponent<Rigidbody>().velocity = transform.right * speed;
         }
 
         // Cambiar de color cuando se golpea
