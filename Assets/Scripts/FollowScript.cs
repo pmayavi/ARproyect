@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class FollowScript : MonoBehaviour
 {
-    public Transform player; // Reference to the player's transform.
+    Transform player; // Reference to the player's transform.
     public float distance = 3.0f; // Desired distance from the player.
 
     private Vector3 offset; // Offset from the player.
 
     private void Start()
     {
-        if (player == null)
-        {
-            Debug.LogError("Player transform not assigned. Please assign the player's transform in the Inspector.");
-            enabled = false; // Disable the script to prevent errors.
-            return;
-        }
-
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         // Calculate the initial offset.
         offset = transform.position - player.position;
     }

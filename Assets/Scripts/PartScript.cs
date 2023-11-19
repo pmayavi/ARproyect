@@ -1,51 +1,65 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
+using TMPro;
 
 public class PartScript : MonoBehaviour
 {
-    private bool isTouched = false;
-    public Text targetText; // Assign the Text component you want to update in the Inspector.
+    public TextMeshProUGUI displayText;
+    public string description;
+    public GameObject objectToDisplay;
+    public float rotationSpeed = 30f;
 
-    public void UpdateText()
+    Transform cameraLocation;
+    GameObject displayedObject;
+    bool isTouched = false;
+    GameObject player;
+
+    void Start()
     {
-        if (targetText != null)
-        {
-            // Update the Text component's text with the new value
-            targetText.text = (int.Parse(targetText.text) + 1).ToString();
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
+        cameraLocation = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     void Update()
     {
         // Check for touch input on mobile devices
-        if (Input.touchCount > 0)
-        {
-            UpdateText();
-            Touch touch = Input.GetTouch(0); // Assuming only one touch at a time
-
-            if (touch.phase == TouchPhase.Began && !isTouched)
-            {
-                // Cast a ray from the touch position
-                Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (hit.collider == GetComponent<Collider>())
-                    {
-                        // Make the object invisible when the collider is touched
-                        gameObject.SetActive(false);
-                        isTouched = true;
-                        UpdateText();
-                    }
-                }
-            }
-        }
+        if (isTouched && (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+            //if (isTouched)
+            Gotten();
     }
 
     void OnTriggerEnter(Collider collision)
     {
+        isTouched = true;
+    }
+
+    void OnTriggerExit(Collider collision)
+    {
+        isTouched = false;
+    }
+
+    public void Gotten()
+    {
+        player.GetComponent<InteractScript>().PartInteraction();
+        DisplayObject();
         Destroy(gameObject);
-        UpdateText();
+    }
+
+    public void DisplayObject()
+    {
+        // Instantiate the object in front of the player
+        //Transform camaraTransform = FindObjectOfType<ARSessionOrigin>().transform;
+        displayedObject = Instantiate(objectToDisplay, cameraLocation.position + cameraLocation.forward * 2f, Quaternion.identity);
+        displayText.text = description;
+
+        // Make the object a child of the ARSessionOrigin (or the main camera)
+        //displayedObject.transform.parent = camaraTransform;
+        displayedObject.transform.parent = cameraLocation;
+        displayedObject.transform.localScale *= 2f;
+
+        // Start rotating the object and the delete timer
+        displayedObject.AddComponent<RotateScript>().rotationSpeed = rotationSpeed;
+        displayedObject.GetComponent<RotateScript>().displayText = displayText;
     }
 }
