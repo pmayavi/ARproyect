@@ -17,7 +17,7 @@ public class ShootProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1")) 
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) 
         {
             GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
             projectileInstance.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 100f, launchSpeed));

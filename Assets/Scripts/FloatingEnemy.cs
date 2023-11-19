@@ -9,6 +9,7 @@ public class FloatingEnemy : MonoBehaviour
     public int speed = 2;
     public int life = 3;
     public float distance = 6.0f;
+    public int movement = 1; // o -1 para moverse en sentido contrario.
 
     // Variables cambio de material cuando se golpea    
     public Material normalMaterial;
@@ -47,15 +48,15 @@ public class FloatingEnemy : MonoBehaviour
         Debug.Log(Vector3.Distance(transform.position, player.transform.position));
         if (Vector3.Distance(transform.position, player.transform.position) > distance)
         {
-            GetComponent<Rigidbody>().velocity = transform.forward * speed + transform.right * speed;    
+            GetComponent<Rigidbody>().velocity = transform.forward * speed + transform.right * speed * movement;    
         } 
         else if (Vector3.Distance(transform.position, player.transform.position) < distance)
         {
-            GetComponent<Rigidbody>().velocity = -transform.forward * speed + transform.right * speed;    
+            GetComponent<Rigidbody>().velocity = -transform.forward * speed + transform.right * speed * movement;    
         } 
         else 
         {
-            GetComponent<Rigidbody>().velocity = transform.right * speed;
+            GetComponent<Rigidbody>().velocity = transform.right * speed * movement ;
         }
 
         // Cambiar de color cuando se golpea
