@@ -41,7 +41,6 @@ ExportedObj/
 sysinfo.txt
 
 # Builds
-*.apk
 *.unitypackage
 
 # Crashlytics generated file
@@ -54,3 +53,5 @@ UserSettings/Layouts/default-2021.dwlt
 UserSettings/Layouts/default-2021.dwlt
 UserSettings/Layouts/default-2021.dwlt
 UserSettings/Layouts/default-2021.dwlt
+Assets/XR/Settings/Open XR Package Settings.asset
+Assets/XR/Settings/Open XR Package Settings.asset

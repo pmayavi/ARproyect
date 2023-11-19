@@ -1,45 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InteractScript : MonoBehaviour
 {
-    Collision currentCollision = null;
+    public int numberOfParts;
+    public int maxParts;
+    public TextMeshProUGUI displayText;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        numberOfParts = 0;
+        displayText.text = "Partes perdidas: " + maxParts;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PartInteraction()
     {
-        if (currentCollision != null && Input.touchCount > 0)
+        numberOfParts++;
+        if (maxParts - numberOfParts == 0)
         {
-            Touch touch = Input.GetTouch(0); // Assuming only one touch at a time
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                Destroy(currentCollision.gameObject);
-                currentCollision = null;
-            }
+            displayText.text = "Encontraste todas las partes!";
+            Invoke("Completed", 3f);
         }
+        else
+            displayText.text = "Partes perdidas: " + (maxParts - numberOfParts);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void Completed()
     {
-        // Check if the colliding object should be deleted
-        if (collision.gameObject.CompareTag("Interactuable"))
-        {
-            currentCollision = collision;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Interactuable"))
-        {
-            currentCollision = null;
-        }
+        displayText.text = "";
     }
 }
