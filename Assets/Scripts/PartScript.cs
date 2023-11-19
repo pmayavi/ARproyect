@@ -5,12 +5,12 @@ using TMPro;
 
 public class PartScript : MonoBehaviour
 {
-    public Transform cameraLocation;
     public TextMeshProUGUI displayText;
     public string description;
     public GameObject objectToDisplay;
     public float rotationSpeed = 30f;
 
+    Transform cameraLocation;
     GameObject displayedObject;
     bool isTouched = false;
     GameObject player;
@@ -18,6 +18,7 @@ public class PartScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        cameraLocation = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     void Update()

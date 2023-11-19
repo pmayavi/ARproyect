@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FloatingEnemy : MonoBehaviour
 {
-    public GameObject player;
+    GameObject player;
     public int speed = 2;
     public int life = 3;
     public float distance = 6.0f;
@@ -26,16 +26,13 @@ public class FloatingEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         Transform bodyTransform = transform.Find("PM3D_Sphere3D2");
 
         if (bodyTransform != null)
-        {
             bodyRenderer = bodyTransform.GetComponent<Renderer>();
-        } 
-        else 
-        {
+        else
             bodyRenderer = transform.GetComponent<Renderer>();
-        }
     }
 
     // Update is called once per frame
@@ -45,34 +42,24 @@ public class FloatingEnemy : MonoBehaviour
         transform.LookAt(player.transform, Vector3.up);
         transform.Rotate(0, 0, 180);
 
-        Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+        //Debug.Log(Vector3.Distance(transform.position, player.transform.position));
         if (Vector3.Distance(transform.position, player.transform.position) > distance)
-        {
-            GetComponent<Rigidbody>().velocity = transform.forward * speed + transform.right * speed * movement;    
-        } 
+            GetComponent<Rigidbody>().velocity = transform.forward * speed + transform.right * speed * movement;
         else if (Vector3.Distance(transform.position, player.transform.position) < distance)
-        {
-            GetComponent<Rigidbody>().velocity = -transform.forward * speed + transform.right * speed * movement;    
-        } 
-        else 
-        {
-            GetComponent<Rigidbody>().velocity = transform.right * speed * movement ;
-        }
+            GetComponent<Rigidbody>().velocity = -transform.forward * speed + transform.right * speed * movement;
+        else
+            GetComponent<Rigidbody>().velocity = transform.right * speed * movement;
 
         // Cambiar de color cuando se golpea
         if (Time.time - hitTime < hitDuration && hitTime != 0)
-        {
             // Gradually return to normal color over hitDuration
             bodyRenderer.material.Lerp(hitMaterial, normalMaterial, (Time.time - hitTime) / hitDuration);
-        }
         else if (bodyRenderer.material != normalMaterial)
-        {
             // Reset material when the hitDuration is over
             bodyRenderer.material = normalMaterial;
-        }
     }
 
-    private void OnCollisionEnter(Collision other) 
+    private void OnCollisionEnter(Collision other)
     {
         if (other.collider.tag == "Projectile")
         {
@@ -80,16 +67,17 @@ public class FloatingEnemy : MonoBehaviour
             hitTime = Time.time;
 
             Destroy(other.collider.gameObject);
-            life = life - 1;
-            if (life == 0) {
+            life--;
+            if (life == 0)
+            {
                 GetComponent<Renderer>().enabled = false;
                 GetComponent<Collider>().enabled = false;
-                if (explosionParticles != null)
-                {
+                if (explosionParticles)
                     // Activate the particle system
                     explosionParticles.Play();
-                }
-                FindObjectOfType<UI>().PickItem();
+
+                //FindObjectOfType<UI>().PickItem();
+                FindObjectOfType<MaskStartScript>().PickItem();
                 Destroy(gameObject, 1f);
             }
         }
