@@ -20,6 +20,7 @@ public class MaskStartScript : MonoBehaviour
     Transform cameraLocation;
     GameObject displayedObject;
     bool isTouched = false;
+    bool isPlaying = false;
     GameObject player;
     MeshRenderer maskMesh;
 
@@ -38,7 +39,7 @@ public class MaskStartScript : MonoBehaviour
     void Update()
     {
         // Check for touch input on mobile devices
-        if (isTouched && (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+        if (!isPlaying && isTouched && (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
             Gotten();
     }
 
@@ -56,6 +57,10 @@ public class MaskStartScript : MonoBehaviour
 
     public void Gotten()
     {
+        isPlaying = true;
+        reticicle.enabled = true;
+        targets.enabled = true;
+        count.enabled = true;
         shooter.enabled = true;
         startGameText.enabled = false;
         maskMesh.enabled = false;
@@ -64,6 +69,9 @@ public class MaskStartScript : MonoBehaviour
 
     public void Completed()
     {
+        reticicle.enabled = false;
+        targets.enabled = false;
+        count.enabled = false;
         shooter.enabled = false;
         player.GetComponent<InteractScript>().PartInteraction();
         DisplayObject();
