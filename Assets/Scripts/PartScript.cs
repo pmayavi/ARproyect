@@ -5,21 +5,12 @@ using TMPro;
 
 public class PartScript : MonoBehaviour
 {
-    public TextMeshProUGUI displayText;
     public string description;
     public GameObject objectToDisplay;
     public float rotationSpeed = 30f;
 
-    Transform cameraLocation;
     GameObject displayedObject;
     bool isTouched = false;
-    GameObject player;
-
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        cameraLocation = GameObject.FindGameObjectWithTag("MainCamera").transform;
-    }
 
     void Update()
     {
@@ -41,16 +32,17 @@ public class PartScript : MonoBehaviour
 
     public void Gotten()
     {
-        player.GetComponent<InteractScript>().PartInteraction();
-        DisplayObject();
+        DisplayObject(objectToDisplay);
         Destroy(gameObject);
     }
 
-    public void DisplayObject()
+    public void DisplayObject(GameObject obj)
     {
+        Transform cameraLocation = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        TextMeshProUGUI displayText = GameObject.FindGameObjectWithTag("UIDetails").GetComponent<TextMeshProUGUI>();
         // Instantiate the object in front of the player
         //Transform camaraTransform = FindObjectOfType<ARSessionOrigin>().transform;
-        displayedObject = Instantiate(objectToDisplay, cameraLocation.position + cameraLocation.forward * 2f, Quaternion.identity);
+        displayedObject = Instantiate(obj, cameraLocation.position + cameraLocation.forward * 2f, Quaternion.identity);
         displayText.text = description;
 
         // Make the object a child of the ARSessionOrigin (or the main camera)

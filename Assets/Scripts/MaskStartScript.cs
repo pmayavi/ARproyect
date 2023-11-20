@@ -16,6 +16,7 @@ public class MaskStartScript : MonoBehaviour
     public Text targets;
     public Text count;
     public GameObject enemies;
+    public CapsuleCollider playerCollider;
 
     Transform cameraLocation;
     GameObject displayedObject;
@@ -57,6 +58,7 @@ public class MaskStartScript : MonoBehaviour
 
     public void Gotten()
     {
+        playerCollider.enabled = false;
         isPlaying = true;
         reticicle.enabled = true;
         targets.enabled = true;
@@ -69,6 +71,7 @@ public class MaskStartScript : MonoBehaviour
 
     public void Completed()
     {
+        playerCollider.enabled = true;
         reticicle.enabled = false;
         targets.enabled = false;
         count.enabled = false;

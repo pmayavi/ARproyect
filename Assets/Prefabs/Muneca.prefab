@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 527487331434406044}
   - component: {fileID: 5991984221607796027}
   - component: {fileID: 2027854651091107711}
-  - component: {fileID: 479122116}
   m_Layer: 0
   m_Name: Muneca
   m_TagString: Untagged
@@ -144,19 +143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayText: {fileID: 0}
-  description: "Es una mu\xF1eca que se va a mover"
+  description: "Es una mu\xF1eca "
   objectToDisplay: {fileID: 7951481398497904212}
   rotationSpeed: 40
---- !u!114 &479122116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7951481398497904212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a28fa460428be604db8131da057c726b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 1

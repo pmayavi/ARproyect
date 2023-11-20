@@ -7,6 +7,8 @@ TagManager:
   - Interactuable
   - Projectile
   - Enemy
+  - UIDetails
+  - End
   layers:
   - Default
   - TransparentFX

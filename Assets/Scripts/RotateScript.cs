@@ -7,6 +7,12 @@ public class RotateScript : MonoBehaviour
 {
     public float rotationSpeed = 30f;
     public TextMeshProUGUI displayText;
+    GameObject player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Update()
     {
@@ -17,6 +23,7 @@ public class RotateScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             displayText.text = "";
+            player.GetComponent<InteractScript>().PartInteraction();
             Destroy(gameObject);
         }
     }

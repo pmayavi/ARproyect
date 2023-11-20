@@ -5,6 +5,7 @@ using TMPro;
 
 public class NPCScript : MonoBehaviour
 {
+    public GameObject displayObject;
     public TextMeshProUGUI displayText;
     public List<Sprite> imageList1; // List of Sprites for Image 1
     public List<Sprite> imageList2; // List of Sprites for Image 2
@@ -21,6 +22,7 @@ public class NPCScript : MonoBehaviour
     bool isTouched = false;
     bool isTalking = false;
     GameObject player;
+    GameObject displayedObject;
 
     void Start()
     {
@@ -39,14 +41,20 @@ public class NPCScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        isTouched = true;
-        displayText.text = "Presiona para hablar";
+        if(collision.CompareTag("Player"))
+        {
+            isTouched = true;
+            displayText.text = "Presiona para hablar";
+        }
     }
 
     void OnTriggerExit(Collider collision)
     {
-        isTouched = false;
-        displayText.text = "";
+        if(collision.CompareTag("Player"))
+        {
+            isTouched = false;
+            displayText.text = "";
+        }
     }
 
     void BeginConversation()
@@ -64,6 +72,21 @@ public class NPCScript : MonoBehaviour
 
     public void Talk()
     {
+        if (currentIndex == textList.Count)
+        {
+            isTalking = false;
+            image1.enabled = false;
+            image2.enabled = false;
+            bubbletext.enabled = false;
+            bubble.enabled = false;
+            bubblename.enabled = false;
+            if (displayObject){
+                displayObject.GetComponent<PartScript>().DisplayObject(displayObject);
+            }
+            Destroy(gameObject);
+        }
+        else
+        {
         // Update images and text based on the current index
         image1.sprite = imageList1[currentIndex];
         image2.sprite = imageList2[currentIndex];
@@ -72,15 +95,6 @@ public class NPCScript : MonoBehaviour
 
         // Cycle through the lists
         currentIndex++;
-        if (currentIndex == Mathf.Min(imageList1.Count, imageList2.Count, textList.Count))
-        {
-            isTalking = false;
-            image1.enabled = false;
-            image2.enabled = false;
-            bubbletext.enabled = false;
-            bubble.enabled = false;
-            bubblename.enabled = false;
-            Destroy(gameObject);
         }
     }
 
