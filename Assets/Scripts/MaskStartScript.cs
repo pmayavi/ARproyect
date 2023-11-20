@@ -93,7 +93,7 @@ public class MaskStartScript : MonoBehaviour
     {
         // Instantiate the object in front of the player
         //Transform camaraTransform = FindObjectOfType<ARSessionOrigin>().transform;
-        displayedObject = Instantiate(objectToDisplay, cameraLocation.position + cameraLocation.forward * 2f, Quaternion.identity);
+        displayedObject = Instantiate(objectToDisplay, cameraLocation.position + cameraLocation.forward * 2f, Quaternion.Euler(180f, 0f, 0f));
         displayText.text = description;
 
         // Make the object a child of the ARSessionOrigin (or the main camera)

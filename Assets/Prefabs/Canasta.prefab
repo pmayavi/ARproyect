@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1610beccb321fb447ae60634517a3779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraLocation: {fileID: 0}
   displayText: {fileID: 0}
   description: Es una canasta que usaron los indigenas
   objectToDisplay: {fileID: 1939247405710853534}

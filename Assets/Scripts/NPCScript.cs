@@ -9,15 +9,15 @@ public class NPCScript : MonoBehaviour
     public List<Sprite> imageList1; // List of Sprites for Image 1
     public List<Sprite> imageList2; // List of Sprites for Image 2
     public List<string> textList;   // List of Strings for Text
-    public List<bool> speaker;
+    public List<string> speakerName;
 
     public Image image1;
     public Image image2;
     public Image bubble;
     public TextMeshProUGUI bubbletext;
+    public TextMeshProUGUI bubblename;
 
     int currentIndex = 0;
-    GameObject displayedObject;
     bool isTouched = false;
     bool isTalking = false;
     GameObject player;
@@ -57,6 +57,7 @@ public class NPCScript : MonoBehaviour
         image2.enabled = true;
         bubbletext.enabled = true;
         bubble.enabled = true;
+        bubblename.enabled = true;
         displayText.text = "";
         Talk();
     }
@@ -67,11 +68,7 @@ public class NPCScript : MonoBehaviour
         image1.sprite = imageList1[currentIndex];
         image2.sprite = imageList2[currentIndex];
         bubbletext.text = textList[currentIndex];
-
-        if (!speaker[currentIndex])
-            bubble.rectTransform.localRotation = Quaternion.Euler(0, 180, 0);
-        else
-            bubble.rectTransform.localRotation = Quaternion.identity;
+        bubblename.text = speakerName[currentIndex];
 
         // Cycle through the lists
         currentIndex++;
@@ -82,6 +79,7 @@ public class NPCScript : MonoBehaviour
             image2.enabled = false;
             bubbletext.enabled = false;
             bubble.enabled = false;
+            bubblename.enabled = false;
             Destroy(gameObject);
         }
     }

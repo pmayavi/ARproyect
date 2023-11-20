@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4676770001216366425}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.278, z: 0}
+  m_LocalPosition: {x: 0, y: -0.396, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 527487331434406044}
   - component: {fileID: 5991984221607796027}
   - component: {fileID: 2027854651091107711}
+  - component: {fileID: 479122116}
   m_Layer: 0
   m_Name: Muneca
   m_TagString: Untagged
@@ -142,8 +143,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1610beccb321fb447ae60634517a3779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraLocation: {fileID: 0}
   displayText: {fileID: 0}
   description: "Es una mu\xF1eca que se va a mover"
   objectToDisplay: {fileID: 7951481398497904212}
   rotationSpeed: 40
+--- !u!114 &479122116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7951481398497904212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a28fa460428be604db8131da057c726b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 1
